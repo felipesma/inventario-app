@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../app.reducer';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,16 +12,25 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit{
 
-  constructor(private authService: AuthService, private router: Router) {}
+  userName: string = '';
+  store$!: Subscription;
+
+  constructor(private authService: AuthService, private router: Router, private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    
+    this.store$ = this.store.select('auth').subscribe(({user}) => {
+      this.userName = user?.name as string;
+    })
   }
 
   async logout() {
     await this.authService.logout();
     console.log('SE CERRO SESION CORRECTAMENTE')
     this.router.navigate(['/login']);
+  }
+
+  ngOnDestroy(): void {
+    this.store$.unsubscribe();
   }
 
 }

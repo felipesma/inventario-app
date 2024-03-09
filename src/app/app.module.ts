@@ -23,7 +23,8 @@ import { environment } from '../environments/environment';
 import { appReducers } from './app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-
+import { OrdenInventarioPipe } from './pipes/orden-inventario.pipe';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -32,11 +33,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     RegisterComponent,
     DashboardComponent,
     InventarioComponent,
-    EstadisticaComponent,
     DetalleComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    OrdenInventarioPipe,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +49,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [],
+  providers: [provideCharts(withDefaultRegisterables())],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

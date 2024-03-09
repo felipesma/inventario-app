@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.uiSubscription = this.store.select('ui').subscribe((ui) => {
       this.cargando = ui.isLoading;
-      console.log('CARGANDO SUBS');
     })
   }
 

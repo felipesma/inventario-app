@@ -14,12 +14,26 @@
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody *ngFor="let item of inventario | ordenInventario">
                 <tr>
-                  <td>Descripción</td>
-                  <td>Monto</td>
-                  <td>Tipo</td>
-                  <td>acciones</td>
+                  <td>{{item.description | titlecase}}</td>
+                  <td>{{item.monto | currency}}</td>
+                  <td 
+                    [class.text-success]="item.tipo === 'ingreso'"
+                    [class.text-danger]="item.tipo === 'egreso'"
+                  >
+                    {{item.tipo | titlecase}}
+                  </td>
+                  <td>
+                    <button 
+                      type="button"
+                      class="btn btn-danger"
+                      (click)="borrar(item.uid)"
+                    >
+                      <i class="fa fa-trash"></i>
+                      Borrar
+                    </button>
+                  </td>
                 </tr>
               </tbody>
 
