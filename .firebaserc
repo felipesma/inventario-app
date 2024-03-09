@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "inventario-redux": {
+      "hosting": {
+        "panel-inventario-app": [
+          "inventario-redux"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "inventario-redux"
+  }
+}
