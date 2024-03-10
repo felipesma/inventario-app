@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       // });
       const { correo, password } = this.loginForm.value;
       const credentials = await this.authService.loginUser(correo, password);
-      console.log('USUARIO LOGUEADO CORRECTAMENTE', credentials);
       // Swal.close();
       this.store.dispatch(ui.stopLoading());
       this.router.navigate(['/']);

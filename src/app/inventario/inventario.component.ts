@@ -5,8 +5,8 @@ import { InventarioService } from '../services/inventario.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AppState } from '../app.reducer';
 import * as ui from '../shared/ui.actions';
+import { AppStateWhithInventary } from './inventario.reducer';
 
 @Component({
   selector: 'app-inventario',
@@ -22,7 +22,7 @@ export class InventarioComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private inventarioService: InventarioService,
-    private store: Store<AppState>
+    private store: Store<AppStateWhithInventary>
   ) {}
 
   ngOnInit(): void {

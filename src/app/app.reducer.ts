@@ -6,11 +6,11 @@ import * as inventario from './inventario/inventario.reducer';
 export interface AppState {
     ui: ui.State,
     auth: auth.State,
-    inventario: inventario.State,
+    // inventario: inventario.State,
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
     ui: ui.uiReducer,
     auth: auth.authReducer,
-    inventario: inventario.inventarioReducer,
+    // inventario: inventario.inventarioReducer,
 }

@@ -1,15 +1,20 @@
-import { inject } from '@angular/core'; 
-import { CanActivateFn, Router } from '@angular/router'; 
-import { tap } from 'rxjs'; 
-import { AuthService } from './auth.service'; 
-
-export const authGuard:CanActivateFn = (route, state) => {   
-  const router = inject(Router); 
-   return inject(AuthService).isAuth().pipe(     
-    tap(estado => {       
-      if(!estado) {
+import { inject } from '@angular/core';
+import { CanActivateFn, CanMatchFn, Router, UrlTree } from '@angular/router';
+import { AuthService } from './auth.service';
+import { Observable, take, tap } from 'rxjs';
+ 
+const isAuthenticated = (): Observable<boolean | UrlTree> => {
+  const router = inject(Router);
+  const authService = inject(AuthService);
+  return authService.isAuth().pipe(
+    tap((estado) => {
+      if (!estado) {
         router.navigate(['/login']);
-      }    
-     })     
-  ) 
-}
+      }
+    }),
+    take(1)
+  );
+};
+ 
+export const canActivate: CanActivateFn = isAuthenticated;
+export const canMatch: CanMatchFn = isAuthenticated;

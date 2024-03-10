@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { AppState } from '../../app.reducer';
 import { Store } from '@ngrx/store';
 import { Inventario } from '../../models/inventario.model';
-import { ChartData, ChartEvent, ChartType } from 'chart.js';
+import { ChartData, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { AppStateWhithInventary } from '../inventario.reducer';
 
 @Component({
   selector: 'app-estadistica',
@@ -30,7 +30,7 @@ export class EstadisticaComponent{
 
   store$!: Subscription;
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppStateWhithInventary>) {}
 
   ngOnInit() {
     this.store$ = this.store.select('inventario').subscribe(({items}) => this.generarEstadistica(items));
@@ -63,17 +63,4 @@ export class EstadisticaComponent{
     }
   }
 
-  // Doughnut
-  // events
-
-  public chartHovered({
-    event,
-    active,
-  }: {
-    event: ChartEvent;
-    active: object[];
-  }): void {
-    console.log(event, active);
-  }
-  
 }

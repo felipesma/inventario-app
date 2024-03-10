@@ -25,7 +25,6 @@ export class SidebarComponent implements OnInit{
 
   async logout() {
     await this.authService.logout();
-    console.log('SE CERRO SESION CORRECTAMENTE')
     this.router.navigate(['/login']);
   }
 
